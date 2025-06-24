@@ -11,7 +11,16 @@ import SwiftUI
 struct TranscriberApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          TabView {
+            TranscriptionView()
+              .tabItem {
+                Label("Non-Whisper", systemImage: "hammer.fill")
+              }
+            WhisperKitView()
+              .tabItem {
+                Label("Whisper", systemImage: "briefcase.fill")
+              }
+          }
         }
     }
 }
