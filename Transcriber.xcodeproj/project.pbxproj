@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		494FC2F92E1350880079A082 /* TranscriptionRecordingButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494FC2F82E1350880079A082 /* TranscriptionRecordingButtons.swift */; };
 		499421222E11A67D003389B3 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 499421212E11A67D003389B3 /* WhisperKit */; };
 		49DE1BCB2E0A681100263100 /* .swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DE1BCA2E0A681100263100 /* .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4936FC772DF9E43600E230BD /* Transcriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		494FC2F82E1350880079A082 /* TranscriptionRecordingButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionRecordingButtons.swift; sourceTree = "<group>"; };
 		49DE1BCA2E0A681100263100 /* .swift */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +60,7 @@
 				4936FC792DF9E43600E230BD /* Transcriber */,
 				4936FC782DF9E43600E230BD /* Products */,
 				49DE1BCA2E0A681100263100 /* .swift */,
+				494FC2F82E1350880079A082 /* TranscriptionRecordingButtons.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494FC2F92E1350880079A082 /* TranscriptionRecordingButtons.swift in Sources */,
 				49DE1BCB2E0A681100263100 /* .swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

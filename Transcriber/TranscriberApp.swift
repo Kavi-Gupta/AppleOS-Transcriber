@@ -13,16 +13,7 @@ struct TranscriberApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabView {
-                StatusView()
-                    .tabItem {
-                        Label("Status", systemImage: "cross.circle.fill")
-                    }
-                TranscriptionView()
-                    .tabItem {
-                        Label("Transcribe", systemImage: "list.bullet.rectangle.portrait.fill")
-                    }
-            }
+            MainView()
         }
         .environment(transcriptionManager)
     }

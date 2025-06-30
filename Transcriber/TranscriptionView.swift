@@ -11,23 +11,7 @@ struct TranscriptionView: View {
     @Environment(TranscriptionManager.self) private var transcriptionManager
     
     var body: some View {
-        VStack {
-            Button("Start Transcribing") {
-                Task {
-                    do {
-                        await transcriptionManager.startRecording()
-                    } catch {
-                        print("Error starting transcription: \(error.localizedDescription)")
-                    }
-                }
-            }
-            
-            Button("Stop Transcribing") {
-                Task {
-                    await transcriptionManager.stopRecording()
-                }
-            }
-        }
+        Text("Hello")
     }
 }
 

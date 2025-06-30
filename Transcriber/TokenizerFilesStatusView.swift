@@ -11,23 +11,23 @@ struct TokenizerFilesStatusView: View {
     @Environment(TranscriptionManager.self) private var transcriptionManager
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Tokenizer Files")
-                if transcriptionManager.tokenizerFilesPresent {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(.green)
-                } else {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(.red)
-                }
-                
-            }
-            List {
-                ForEach(transcriptionManager.missingTokenizerFiles, id: \.self) {
-                    Text($0)
-                }
-            }
-        }
+//        VStack {
+//            HStack {
+//                Text("Tokenizer Files")
+//                if transcriptionManager.tokenizerFilesPresent {
+//                    Image(systemName: "checkmark.circle.fill")
+//                        .foregroundStyle(.green)
+//                } else {
+//                    Image(systemName: "xmark.circle.fill")
+//                        .foregroundStyle(.red)
+//                }
+//                
+//            }
+//            List {
+//                ForEach(transcriptionManager.missingTokenizerFiles, id: \.self) {
+//                    Text($0)
+//                }
+//            }
+//        }
     }
 }
