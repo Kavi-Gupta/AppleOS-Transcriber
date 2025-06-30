@@ -9,18 +9,21 @@ import SwiftUI
 
 @main
 struct TranscriberApp: App {
+    @State var transcriptionManager = TranscriptionManager()
+    
     var body: some Scene {
         WindowGroup {
-          TabView {
-            TranscriptionView()
-              .tabItem {
-                Label("Non-Whisper", systemImage: "hammer.fill")
-              }
-            WhisperKitView()
-              .tabItem {
-                Label("Whisper", systemImage: "briefcase.fill")
-              }
-          }
+            TabView {
+                StatusView()
+                    .tabItem {
+                        Label("Status", systemImage: "cross.circle.fill")
+                    }
+                TranscriptionView()
+                    .tabItem {
+                        Label("Transcribe", systemImage: "list.bullet.rectangle.portrait.fill")
+                    }
+            }
         }
+        .environment(transcriptionManager)
     }
 }

@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4936FC882DF9E4E100E230BD /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936FC872DF9E4E100E230BD /* WhisperKit */; };
+		499421222E11A67D003389B3 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 499421212E11A67D003389B3 /* WhisperKit */; };
+		49DE1BCB2E0A681100263100 /* .swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DE1BCA2E0A681100263100 /* .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4936FC772DF9E43600E230BD /* Transcriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DE1BCA2E0A681100263100 /* .swift */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -30,6 +32,9 @@
 			exceptions = (
 				49EFC5F72E08DD1800A62C05 /* Exceptions for "Transcriber" folder in "Transcriber" target */,
 			);
+			explicitFolders = (
+				Models,
+			);
 			path = Transcriber;
 			sourceTree = "<group>";
 		};
@@ -40,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4936FC882DF9E4E100E230BD /* WhisperKit in Frameworks */,
+				499421222E11A67D003389B3 /* WhisperKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,7 @@
 			children = (
 				4936FC792DF9E43600E230BD /* Transcriber */,
 				4936FC782DF9E43600E230BD /* Products */,
+				49DE1BCA2E0A681100263100 /* .swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,7 +89,7 @@
 			);
 			name = Transcriber;
 			packageProductDependencies = (
-				4936FC872DF9E4E100E230BD /* WhisperKit */,
+				499421212E11A67D003389B3 /* WhisperKit */,
 			);
 			productName = Transcriber;
 			productReference = 4936FC772DF9E43600E230BD /* Transcriber.app */;
@@ -114,7 +120,7 @@
 			mainGroup = 4936FC6E2DF9E43600E230BD;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4936FC862DF9E4E100E230BD /* XCRemoteSwiftPackageReference "WhisperKit" */,
+				499421202E11A67D003389B3 /* XCLocalSwiftPackageReference "../WhisperKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4936FC782DF9E43600E230BD /* Products */;
@@ -141,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DE1BCB2E0A681100263100 /* .swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,21 +361,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		4936FC862DF9E4E100E230BD /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/argmaxinc/WhisperKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.0;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		499421202E11A67D003389B3 /* XCLocalSwiftPackageReference "../WhisperKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../WhisperKit;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4936FC872DF9E4E100E230BD /* WhisperKit */ = {
+		499421212E11A67D003389B3 /* WhisperKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4936FC862DF9E4E100E230BD /* XCRemoteSwiftPackageReference "WhisperKit" */;
 			productName = WhisperKit;
 		};
 /* End XCSwiftPackageProductDependency section */
