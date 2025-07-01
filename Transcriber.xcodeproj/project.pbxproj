@@ -16,22 +16,9 @@
 		49DE1BCA2E0A681100263100 /* .swift */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		49EFC5F72E08DD1800A62C05 /* Exceptions for "Transcriber" folder in "Transcriber" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 4936FC762DF9E43600E230BD /* Transcriber */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4936FC792DF9E43600E230BD /* Transcriber */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				49EFC5F72E08DD1800A62C05 /* Exceptions for "Transcriber" folder in "Transcriber" target */,
-			);
 			explicitFolders = (
 				Models,
 			);
@@ -289,7 +276,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Transcriber/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "Transcriber Live";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -331,7 +318,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Transcriber/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = "Transcriber Live";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
