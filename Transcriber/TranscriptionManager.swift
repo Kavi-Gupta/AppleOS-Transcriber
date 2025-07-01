@@ -27,6 +27,8 @@ class TranscriptionManager {
         modelSuperFolder + "/openai_whisper-" + modelVariant.description
     }
     
+    var mostRecentBufferState: AudioStreamTranscriber.State? = nil
+    
     var tokenizerFolder: String {
         tokenizerSuperFolder
     }
@@ -88,8 +90,7 @@ class TranscriptionManager {
         let callback: AudioStreamTranscriberCallback = { previousState, nextState in
             
             self.isRecording = nextState.isRecording
-            print(previousState.unconfirmedText)
-            print(previousState.currentText)
+            self.mostRecentBufferState = nextState
         }
         
         self.audioStreamTranscriber = AudioStreamTranscriber(
@@ -110,7 +111,7 @@ class TranscriptionManager {
             throw WhisperError.initializationError("Audio stream transcriber not initialized")
         }
         
-//        try await transcriber.startStreamTranscription()
+        try await transcriber.startStreamTranscription()
         self.recordingState = .recording
     }
     
@@ -128,7 +129,7 @@ class TranscriptionManager {
             throw WhisperError.initializationError("Audio stream transcriber not initialized")
         }
         
-//        await transcriber.stopStreamTranscription()
+        await transcriber.stopStreamTranscription()
         self.recordingState = .stopped
     }
     

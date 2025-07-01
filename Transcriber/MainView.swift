@@ -37,6 +37,7 @@ struct MainView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         #endif
     }
 }

@@ -11,7 +11,7 @@ struct TranscriptionView: View {
     @Environment(TranscriptionManager.self) private var transcriptionManager
     
     var body: some View {
-        Text("Hello")
+        Text(transcriptionManager.mostRecentBufferState?.currentText ?? "")
     }
 }
 
