@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		499421222E11A67D003389B3 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = 499421212E11A67D003389B3 /* WhisperKit */; };
 		49DE1BCB2E0A681100263100 /* .swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DE1BCA2E0A681100263100 /* .swift */; };
+		49F8333F2E1633C900704BDE /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8333E2E1633C900704BDE /* DeviceListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4936FC772DF9E43600E230BD /* Transcriber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcriber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DE1BCA2E0A681100263100 /* .swift */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swift; sourceTree = "<group>"; };
+		49F8333E2E1633C900704BDE /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -42,6 +44,7 @@
 		4936FC6E2DF9E43600E230BD = {
 			isa = PBXGroup;
 			children = (
+				49F8333E2E1633C900704BDE /* DeviceListView.swift */,
 				4936FC792DF9E43600E230BD /* Transcriber */,
 				4936FC782DF9E43600E230BD /* Products */,
 				49DE1BCA2E0A681100263100 /* .swift */,
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49DE1BCB2E0A681100263100 /* .swift in Sources */,
+				49F8333F2E1633C900704BDE /* DeviceListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +285,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to transcribe conversations";
+				INFOPLIST_KEY_UILaunchStoryboardName = nil;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -323,6 +328,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is required to transcribe conversations";
+				INFOPLIST_KEY_UILaunchStoryboardName = nil;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,7 +11,11 @@ struct TranscriptionView: View {
     @Environment(TranscriptionManager.self) private var transcriptionManager
     
     var body: some View {
-        Text(transcriptionManager.mostRecentBufferState?.currentText ?? "")
+        VStack {
+            RecordingStatusView()
+            Text(transcriptionManager.mostRecentBufferState?.currentText ?? "")
+        }
+        
     }
 }
 

@@ -13,8 +13,11 @@ struct MainView: View {
     var body: some View {
         #if os(macOS)
         NavigationSplitView {
-            RecordingStatusView()
-            Spacer()
+            VStack {
+                RecordingStatusView()
+                DeviceListView()
+                Spacer()
+            }
         } detail: {
             TranscriptionView()
         }
@@ -24,8 +27,12 @@ struct MainView: View {
         #elseif os(iOS)
         TabView {
             Tab("Status", systemImage: "list.bullet.clipboard.fill") {
-                RecordingStatusView()
-                Spacer()
+                VStack {
+                    RecordingStatusView()
+                    DeviceListView()
+                    Spacer()
+                }
+                
             }
             Tab("Transcribe", systemImage: "microphone.fill") {
                 NavigationStack {
@@ -34,6 +41,7 @@ struct MainView: View {
                         .toolbar {
                             TranscriptionRecordingButtons()
                         }
+                    
                 }
             }
         }

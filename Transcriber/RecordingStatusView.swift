@@ -32,8 +32,6 @@ struct RecordingStatusView: View {
                 .frame(width: 10, height: 10)
                 .foregroundStyle(transcriptionManager.recordingState.color)
             Text(transcriptionManager.recordingState.description.capitalized)
-            Text("Avg: \(average)")
-            Text("Sum: \(sum)")
         }
     }
 }
