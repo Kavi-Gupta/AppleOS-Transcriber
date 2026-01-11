@@ -37,6 +37,7 @@ struct Transcriber: View {
     
     let streamingASRConfig: StreamingAsrConfig
     let streamingASR: StreamingAsrManager
+    let diarizer = DiarizerManager()
     
     let audioEngine = AVAudioEngine()
     
@@ -46,72 +47,77 @@ struct Transcriber: View {
     }
         
     var body: some View {
-        VStack {
-            Text("Past Recordings")
-            if microphoneAllowed {
-                switch transcriptionState {
-                    case .starting:
-                        ProgressView("Starting...")
-                    case .running:
-                        Text(volatileTranscript)
-                    case .ending:
-                        ProgressView("Ending...")
-                    case .inactive:
-                        Text(finalTranscript)
-                }
-            } else {
-                ContentUnavailableView {
-                    Label("Recording Not Allowed", systemImage: "microphone.slash")
-                } description: {
-                    Text("Transcriber does not have permission to access the microphone. Please visit settings.")
-                } actions: {
-                    if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                        Link(destination: url) {
-                            Label("Microphone settings in Settings", systemImage: "microphone.badge.ellipsis")
+        NavigationView {
+            VStack {
+                Text("Past Recordings")
+                if microphoneAllowed {
+                    switch transcriptionState {
+                        case .starting:
+                            ProgressView("Starting...")
+                        case .running:
+                            Text(finalTranscript)
+                                .foregroundStyle(.secondary)
+                            Divider()
+                            Text(volatileTranscript)
+                        case .ending:
+                            ProgressView("Ending...")
+                        case .inactive:
+                            Text(finalTranscript)
+                    }
+                } else {
+                    ContentUnavailableView {
+                        Label("Recording Not Allowed", systemImage: "microphone.slash")
+                    } description: {
+                        Text("Transcriber does not have permission to access the microphone. Please visit settings.")
+                    } actions: {
+                        if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                            Link(destination: url) {
+                                Label("Microphone settings in Settings", systemImage: "microphone.badge.ellipsis")
+                            }
                         }
                     }
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                switch transcriptionState {
-                    case .starting:
-                        ProgressView()
-                    case .running:
-                        Button {
-                            Task {
-                                do {
-                                    try await stop()
-                                } catch {
-                                    print(error.localizedDescription)
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    switch transcriptionState {
+                        case .starting:
+                            ProgressView()
+                        case .running:
+                            Button {
+                                Task {
+                                    do {
+                                        try await stop()
+                                    } catch {
+                                        print(error.localizedDescription)
+                                    }
                                 }
+                            } label: {
+                                Label("End Recording", systemImage: "stop.fill")
                             }
-                        } label: {
-                            Label("End Recording", systemImage: "stop.fill")
-                        }
-                    case .ending:
-                        ProgressView()
-                    case .inactive:
-                        Button {
-                            Task {
-                                do {
-                                    try await start()
-                                } catch TranscriberError.micPermissionDenied {
-                                    await refresh()
-                                } catch {
-                                    print(error.localizedDescription)
+                        case .ending:
+                            ProgressView()
+                        case .inactive:
+                            Button {
+                                Task {
+                                    do {
+                                        try await start()
+                                    } catch TranscriberError.micPermissionDenied {
+                                        await refresh()
+                                    } catch {
+                                        print(error.localizedDescription)
+                                    }
                                 }
+                            } label: {
+                                Label("Start Recording", systemImage: "play.fill")
                             }
-                        } label: {
-                            Label("Start Recording", systemImage: "play.fill")
-                        }
-                        .buttonStyle(RecordingButtonStyle())
+                            .buttonStyle(RecordingButtonStyle())
+                    }
                 }
             }
-        }
-        .refreshable {
-            await refresh()
+            .refreshable {
+                await refresh()
+            }
         }
     }
     
@@ -130,7 +136,11 @@ struct Transcriber: View {
             
             //        try await streamingASR.start(models: models, source: .microphone)
             
+            let diarizationModels = try await DiarizerModels.downloadIfNeeded()
+            
             try await streamingASR.start()
+                        
+            diarizer.initialize(models: diarizationModels)
             
             updateTask = Task {
                 for await update in await streamingASR.transcriptionUpdates {
@@ -139,7 +149,9 @@ struct Transcriber: View {
                     } else {
                         print("VOLATILE: \(update.text)")
                     }
-                    await  refreshTranscript()
+                    Task { @MainActor in
+                        await refreshTranscript()
+                    }
                     Logger.transcription.debug("New Update")
                     print("New Update")
                 }
@@ -148,14 +160,38 @@ struct Transcriber: View {
                         
             let inputNode = audioEngine.inputNode
             
-            let bufferSize = UInt32(truncatingIfNeeded: Int(inputNode.outputFormat(forBus: 0).sampleRate * streamingASRConfig.hypothesisChunkSeconds))
+//            let bufferSize = UInt32(truncatingIfNeeded: Int(inputNode.outputFormat(forBus: 0).sampleRate * streamingASRConfig.hypothesisChunkSeconds))
+            let bufferSize = UInt32(truncatingIfNeeded: Int(inputNode.outputFormat(forBus: 0).sampleRate * 5))
+            
+            let diarizationBufferSize = UInt32(truncatingIfNeeded: Int(inputNode.outputFormat(forBus: 0).sampleRate * 10))
+            
+            let audioStream = try AudioStream(chunkDuration: 5.0, chunkSkip: 3.0, streamStartTime: 0.0, chunkingStrategy: .useFixedSkip)
+            guard let diarizationFormat = AVAudioFormat(standardFormatWithSampleRate: 16000, channels: 1) else {
+                throw TranscriberError.diarizationFormatCreationError
+            }
+            
+            let converter = AVAudioConverter(from: inputNode.outputFormat(forBus: 0), to: diarizationFormat)
             
             inputNode.installTap(onBus: 0, bufferSize: bufferSize, format: inputNode.outputFormat(forBus: 0)) { (buffer, time) in
                 Logger.transcription.debug("New buffer tapped")
+                try? audioStream.write(from: buffer)
                 Task {
                     await streamingASR.streamAudio(buffer)
                 }
             }
+            
+            
+            audioStream.bind { chunk, time in
+                let results = try diarizer.performCompleteDiarization(chunk, atTime: time)
+                for segment in results.segments {
+                    print("Speaker \(segment.speakerId): \(segment.startTimeSeconds)s - \(segment.endTimeSeconds)s")
+                    print("Confidence: \(segment.qualityScore)")
+                    print("Duration: \(segment.durationSeconds)")
+                }
+            }
+            
+//            inputNode.installTap(onBus: 1, bufferSize: diarizationBufferSize, format: inputNode.outputFormat(forBus: 1)) { (buffer, time) in
+//            }
             
             audioEngine.prepare()
             
@@ -163,6 +199,11 @@ struct Transcriber: View {
             
             transcriptionState = .running
         } catch {
+            audioEngine.inputNode.removeTap(onBus: 0)
+            audioEngine.inputNode.removeTap(onBus: 1)
+            audioEngine.stop()
+            audioEngine.reset()
+            updateTask?.cancel()
             transcriptionState = .inactive
             throw error
         }
@@ -173,7 +214,9 @@ struct Transcriber: View {
         
         do {
             audioEngine.inputNode.removeTap(onBus: 0)
+            audioEngine.inputNode.removeTap(onBus: 1)
             audioEngine.stop()
+            audioEngine.reset()
             updateTask?.cancel()
             finalTranscript = try await streamingASR.finish()
             try await streamingASR.reset()
@@ -214,6 +257,7 @@ struct MicrophoneNotAllowedView: View {
 enum TranscriberError: Error {
     case micPermissionDenied
     case modelDownloadAndLoadIssue
+    case diarizationFormatCreationError
 }
 
 #Preview {

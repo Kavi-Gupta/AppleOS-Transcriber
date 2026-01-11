@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490C73752E94B43400793923 /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 490C73742E94B43400793923 /* FluidAudio */; };
+		4948C7F52EDAC10500A2FC33 /* FluidAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 4948C7F42EDAC10500A2FC33 /* FluidAudio */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				490C73752E94B43400793923 /* FluidAudio in Frameworks */,
+				4948C7F52EDAC10500A2FC33 /* FluidAudio in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = Transcriber;
 			packageProductDependencies = (
-				490C73742E94B43400793923 /* FluidAudio */,
+				4948C7F42EDAC10500A2FC33 /* FluidAudio */,
 			);
 			productName = Transcriber;
 			productReference = 4936FC772DF9E43600E230BD /* Transcriber.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 4936FC6E2DF9E43600E230BD;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				490C73732E94B43400793923 /* XCRemoteSwiftPackageReference "FluidAudio" */,
+				4948C7F32EDAC10500A2FC33 /* XCRemoteSwiftPackageReference "FluidAudio" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4936FC782DF9E43600E230BD /* Products */;
@@ -359,20 +359,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		490C73732E94B43400793923 /* XCRemoteSwiftPackageReference "FluidAudio" */ = {
+		4948C7F32EDAC10500A2FC33 /* XCRemoteSwiftPackageReference "FluidAudio" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/FluidInference/FluidAudio.git";
+			repositoryURL = "https://github.com/FluidInference/FluidAudio";
 			requirement = {
-				kind = exactVersion;
-				version = 0.6.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.10;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		490C73742E94B43400793923 /* FluidAudio */ = {
+		4948C7F42EDAC10500A2FC33 /* FluidAudio */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 490C73732E94B43400793923 /* XCRemoteSwiftPackageReference "FluidAudio" */;
+			package = 4948C7F32EDAC10500A2FC33 /* XCRemoteSwiftPackageReference "FluidAudio" */;
 			productName = FluidAudio;
 		};
 /* End XCSwiftPackageProductDependency section */
